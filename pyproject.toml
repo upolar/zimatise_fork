@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "zimatise-fork"
-version = "0.1.0"
+version = "1.2.6-beta"
 description = ""
 authors = ["Polar"]
 readme = "README.md"
