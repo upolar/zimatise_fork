@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "zimatise-fork"
+version = "0.1.0"
+description = ""
+authors = ["Polar"]
+readme = "README.md"
+packages = [{include = "zimatise_fork"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+asyncio = "^3.4.3"
+natsort = "^8.2.0"
+numpy = "^1.23.3"
+openpyxl = "^3.0.10"
+pandas = "^1.5.0"
+PyAutoGUI = "^0.9.53"
+pyperclip = "^1.8.2"
+Pyrogram = "^2.0.57"
+TgCrypto = "^1.2.3"
+Unidecode = "^1.3.6"
+tgsender = "^0.1.1"
+vidtool = "^0.1.4"
+zipind = "^1.1.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

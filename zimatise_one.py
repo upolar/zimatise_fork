@@ -139,6 +139,7 @@ def run_silent_mode(
     document_title,
     reencode_plan,
     mode,
+    alternative_mode
 ):
 
     folder_path_report = vidtool.get_folder_path(folder_path_report)
@@ -240,7 +241,9 @@ def run_silent_mode(
             folder_path_project,
             document_hashtag,
             document_title,
-        )
+            folder_path_input=folder_path_report,
+            alternative_mode=alternative_mode
+ )
     else:
         # create descriptions.xlsx for single reencode
         single_mode.single_description_summary(
@@ -254,6 +257,8 @@ def run_silent_mode(
             folder_path_project,
             document_hashtag,
             document_title,
+            folder_path_input=folder_path_report,
+            alternative_mode=alternative_mode
         )
 
     # make header project
@@ -306,6 +311,7 @@ def main():
     config = utils.get_config_data(path_file_config)
     file_size_limit_mb = int(config["file_size_limit_mb"])
     mode = config["mode"]
+    alternative_mode = int(config["alternative_mode"])
     max_path = int(config["max_path"])
     list_video_extensions = config["video_extensions"].split(",")
     duration_limit = config["duration_limit"]
@@ -334,7 +340,7 @@ def main():
     dict_summary = {}
     dict_summary["path_summary_top"] = Path("user") / path_summary_top
     dict_summary["path_summary_bot"] = Path("user") / path_summary_bot
-
+    path_summary_top = dict_summary["path_summary_top"] 
     file_path_report = None
     folder_path_report = None
     utils.ensure_folder_existence(["projects"])
@@ -360,6 +366,7 @@ def main():
                 document_title,
                 reencode_plan,
                 mode,
+                alternative_mode
             )
             input("\nProject processed and sent to Telegram")
             vidtool.clean_cmd()
@@ -370,11 +377,9 @@ def main():
         # 1-Create independent Zip parts for not_video_files
         if menu_answer == 1:
             # Zip not video files
-
             folder_path_report = vidtool.get_folder_path(folder_path_report)
             file_path_report = vidtool.set_path_file_report(folder_path_report)
             folder_path_project = os.path.dirname(file_path_report)
-
             if os.path.isdir(folder_path_report) is False:
                 input("\nThe folder does not exist.")
                 vidtool.clean_cmd()
@@ -579,6 +584,8 @@ def main():
                     folder_path_project,
                     document_hashtag,
                     document_title,
+                    folder_path_input=folder_path_report,
+                    alternative_mode=alternative_mode,
                 )
             else:
                 # create descriptions.xlsx for single reencode
@@ -593,7 +600,9 @@ def main():
                     folder_path_project,
                     document_hashtag,
                     document_title,
-                )
+                    folder_path_input=folder_path_report,
+                    alternative_mode=alternative_mode
+               )
 
             # make header project
             header_maker(folder_path_project)
